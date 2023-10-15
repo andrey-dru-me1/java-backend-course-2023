@@ -1,13 +1,14 @@
 package edu.hw1;
 
 import java.util.Arrays;
+import org.jetbrains.annotations.NotNull;
 
 public class Task6 {
 
     private static final int DIGITS_COUNT = 4;
     private static final int KAPREKAR_NUMBER = 6174;
 
-    private static byte[] numberToDigits(int number) {
+    private static byte @NotNull [] numberToDigits(int number) {
         byte[] digits = new byte[DIGITS_COUNT];
         for (int i = 0; i < DIGITS_COUNT; i++) {
             digits[DIGITS_COUNT - 1 - i] = (byte) (number % 10);
@@ -16,7 +17,7 @@ public class Task6 {
         return digits;
     }
 
-    private static int digitsToNumber(byte[] digits) {
+    private static int digitsToNumber(byte @NotNull [] digits) {
         int number = 0;
         for (byte digit : digits) {
             number = number * 10 + digit;

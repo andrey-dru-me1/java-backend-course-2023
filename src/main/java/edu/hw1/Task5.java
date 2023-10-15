@@ -1,11 +1,13 @@
 package edu.hw1;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Task5 {
     private static int calculateDigitsCount(int number) {
         return Integer.toString(number).length();
     }
 
-    private static byte[] numberToDigits(int number) {
+    private static byte @NotNull [] numberToDigits(int number) {
         int digitCount = calculateDigitsCount(number);
         byte[] digits = new byte[digitCount];
         for (int i = 0; i < digitCount; i++) {
