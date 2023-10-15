@@ -3,28 +3,36 @@ package edu.hw1;
 import org.jetbrains.annotations.NotNull;
 
 public class Task5 {
+
+    private static final int RADIX = 10;
+
+    private Task5() {
+    }
+
     private static int calculateDigitsCount(int number) {
         return Integer.toString(number).length();
     }
 
     private static byte @NotNull [] numberToDigits(int number) {
-        int digitCount = calculateDigitsCount(number);
+        int n = number;
+        int digitCount = calculateDigitsCount(n);
         byte[] digits = new byte[digitCount];
         for (int i = 0; i < digitCount; i++) {
-            digits[digitCount - 1 - i] = (byte) (number % 10);
-            number /= 10;
+            digits[digitCount - 1 - i] = (byte) (n % RADIX);
+            n /= RADIX;
         }
         return digits;
     }
 
     private static int calculateDescendent(int number) {
+        int n = number;
         int res = 0;
-        while (number > 0) {
-            int d1 = number % 10;
-            number /= 10;
-            int d2 = number % 10;
-            number /= 10;
-            res = res * 10 + d1 + d2;
+        while (n > 0) {
+            int d1 = n % RADIX;
+            n /= RADIX;
+            int d2 = n % RADIX;
+            n /= RADIX;
+            res = res * RADIX + d1 + d2;
         }
         return res;
     }
@@ -40,9 +48,10 @@ public class Task5 {
     }
 
     public static boolean isPalindromeDescendant(int number) {
-        while (calculateDigitsCount(number) > 1 && !isPalindrome(number)) {
-            number = calculateDescendent(number);
+        int n = number;
+        while (calculateDigitsCount(n) > 1 && !isPalindrome(n)) {
+            n = calculateDescendent(n);
         }
-        return calculateDigitsCount(number) > 1;
+        return calculateDigitsCount(n) > 1;
     }
 }

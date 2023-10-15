@@ -6,6 +6,10 @@ import org.apache.logging.log4j.Logger;
 public class Task0 {
     private static final Logger LOGGER = LogManager.getLogger();
 
+    private Task0() {
+    }
+
+    @SuppressWarnings("uncommentedmain")
     public static void main(String[] args) {
         LOGGER.info("Привет мир!");
     }

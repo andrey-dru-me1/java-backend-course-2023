@@ -4,9 +4,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class Task1 {
 
+    private Task1() {
+    }
+
+    @SuppressWarnings("magicnumber")
     public static int minutesToSeconds(@NotNull String string) {
         byte[] bytes = string.getBytes();
-        int i = 0, seconds = 0;
+        int i = 0;
+        int seconds = 0;
 
         if (bytes.length != 5) {
             return -1;

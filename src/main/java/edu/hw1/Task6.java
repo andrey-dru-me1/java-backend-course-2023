@@ -4,15 +4,19 @@ import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
 
 public class Task6 {
-
     private static final int DIGITS_COUNT = 4;
     private static final int KAPREKAR_NUMBER = 6174;
+    private static final int RADIX = 10;
+
+    private Task6() {
+    }
 
     private static byte @NotNull [] numberToDigits(int number) {
+        int n = number;
         byte[] digits = new byte[DIGITS_COUNT];
         for (int i = 0; i < DIGITS_COUNT; i++) {
-            digits[DIGITS_COUNT - 1 - i] = (byte) (number % 10);
-            number /= 10;
+            digits[DIGITS_COUNT - 1 - i] = (byte) (n % RADIX);
+            n /= RADIX;
         }
         return digits;
     }
@@ -20,7 +24,7 @@ public class Task6 {
     private static int digitsToNumber(byte @NotNull [] digits) {
         int number = 0;
         for (byte digit : digits) {
-            number = number * 10 + digit;
+            number = number * RADIX + digit;
         }
         return number;
     }
