@@ -53,7 +53,22 @@ public class Task6 {
         return recCountK(makeDescendingDigitsOrder(number) - makeAscendingDigitsOrder(number), depth + 1);
     }
 
+    private static boolean check4SameDigits(int number) {
+        int d = number % RADIX;
+        for (int i = 1; i < DIGITS_COUNT; i++) {
+            number /= RADIX;
+            if (d != number % RADIX) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static int countK(int fourDigitNumber) {
+        if (!(fourDigitNumber > 1000 && Integer.toString(fourDigitNumber).length() == 4 &&
+            !check4SameDigits(fourDigitNumber))) {
+            throw new IllegalArgumentException();
+        }
         return recCountK(fourDigitNumber, 0);
     }
 }
