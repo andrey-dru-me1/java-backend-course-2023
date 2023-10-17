@@ -17,5 +17,7 @@ class Task1Test {
         assertThat(Task1.minutesToSeconds("1:40")).isEqualTo(100);
         assertThat(Task1.minutesToSeconds("001:40")).isEqualTo(100);
         assertThat(Task1.minutesToSeconds("99:56")).isEqualTo(5996);
+        assertThat(Task1.minutesToSeconds("ab:56")).isEqualTo(-1);
+        assertThat(Task1.minutesToSeconds("15:ab")).isEqualTo(-1);
     }
 }
