@@ -1,12 +1,10 @@
 package edu.hw1;
 
-import org.jetbrains.annotations.NotNull;
-
 public final class Task3 {
     private Task3() {
     }
 
-    private static int arrMax(int @NotNull [] a) {
+    private static int arrMax(int[] a) {
         if (a.length == 0) {
             return Integer.MIN_VALUE;
         }
@@ -19,7 +17,7 @@ public final class Task3 {
         return max;
     }
 
-    private static int arrMin(int @NotNull [] a) {
+    private static int arrMin(int[] a) {
         if (a.length == 0) {
             return Integer.MAX_VALUE;
         }
