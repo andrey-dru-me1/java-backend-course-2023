@@ -2,7 +2,7 @@ package edu.hw1;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Task3 {
+public final class Task3 {
     private Task3() {
     }
 

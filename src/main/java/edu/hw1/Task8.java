@@ -1,6 +1,6 @@
 package edu.hw1;
 
-public class Task8 {
+public final class Task8 {
 
     private static final int FIELD_SIZE = 8;
 

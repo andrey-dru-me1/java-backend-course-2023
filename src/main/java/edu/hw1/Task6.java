@@ -3,7 +3,7 @@ package edu.hw1;
 import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
 
-public class Task6 {
+public final class Task6 {
     private static final int DIGITS_COUNT = 4;
     private static final int KAPREKAR_NUMBER = 6174;
     private static final int RADIX = 10;
@@ -54,19 +54,21 @@ public class Task6 {
     }
 
     private static boolean check4SameDigits(int number) {
-        int d = number % RADIX;
+        int n = number;
+        int d = n % RADIX;
         for (int i = 1; i < DIGITS_COUNT; i++) {
-            number /= RADIX;
-            if (d != number % RADIX) {
+            n /= RADIX;
+            if (d != n % RADIX) {
                 return false;
             }
         }
         return true;
     }
 
+    @SuppressWarnings("magicnumber")
     public static int countK(int fourDigitNumber) {
-        if (!(fourDigitNumber > 1000 && Integer.toString(fourDigitNumber).length() == 4 &&
-            !check4SameDigits(fourDigitNumber))) {
+        if (!(fourDigitNumber > 1000 && Integer.toString(fourDigitNumber).length() == 4
+            && !check4SameDigits(fourDigitNumber))) {
             throw new IllegalArgumentException();
         }
         return recCountK(fourDigitNumber, 0);

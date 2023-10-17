@@ -1,6 +1,6 @@
 package edu.hw1;
 
-public class Task2 {
+public final class Task2 {
 
     private static final int RADIX = 10;
 
