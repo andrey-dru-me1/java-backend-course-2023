@@ -2,7 +2,7 @@ package edu.hw1;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Task5 {
+public final class Task5 {
 
     private static final int RADIX = 10;
 
@@ -49,6 +49,9 @@ public class Task5 {
 
     public static boolean isPalindromeDescendant(int number) {
         int n = number;
+        if (isPalindrome(number)) {
+            return true;
+        }
         while (calculateDigitsCount(n) > 1 && !isPalindrome(n)) {
             n = calculateDescendent(n);
         }

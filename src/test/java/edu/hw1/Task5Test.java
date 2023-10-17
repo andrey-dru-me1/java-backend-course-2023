@@ -14,5 +14,6 @@ class Task5Test {
         assertThat(Task5.isPalindromeDescendant(13001120)).isTrue();
         assertThat(Task5.isPalindromeDescendant(11)).isTrue();
         assertThat(Task5.isPalindromeDescendant(12)).isFalse();
+        assertThat(Task5.isPalindromeDescendant(1)).isTrue();
     }
 }
