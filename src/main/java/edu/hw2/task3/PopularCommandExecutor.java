@@ -23,7 +23,9 @@ public final class PopularCommandExecutor {
           connection.execute(command);
           break;
         } catch (ConnectionException e) {
-          if (i >= maxAttempts) throw e;
+          if (i >= maxAttempts) {
+            throw e;
+          }
         }
       }
     }
