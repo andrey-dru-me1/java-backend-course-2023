@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class Task1Test {
   @Test
-  @DisplayName("Перевод минут в секунды")
+  @DisplayName("Математические выражения")
   void test() {
     var two = new Constant(2);
     assertThat(two.evaluate()).isEqualTo(2.);
