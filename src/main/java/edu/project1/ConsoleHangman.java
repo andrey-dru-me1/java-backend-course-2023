@@ -2,16 +2,19 @@ package edu.project1;
 
 import java.util.Scanner;
 
-public class Game {
+public class ConsoleHangman {
     private static final int ATTEMPT_AMOUNT = 5;
 
-    private Game() {
+    private ConsoleHangman() {
     }
 
     @SuppressWarnings("regexpsinglelinejava")
-    private static void start(int maxMistakes) {
+    public static Result start(String wordToGuess, int maxMistakes) {
+        if (wordToGuess.isEmpty()) {
+            throw new IllegalArgumentException("Cannot take zero-length word");
+        }
         Scanner scanner = new Scanner(System.in);
-        HiddenWord word = new HiddenWord(Dictionary.getRandomWord());
+        HiddenWord word = new HiddenWord(wordToGuess);
 
         int mistakeCount = 0;
         while (!word.isGuessed() && mistakeCount < maxMistakes) {
@@ -28,16 +31,20 @@ public class Game {
                 }
             } else if (line.equals("quit") || line.equals("exit")) {
                 System.out.println("Exiting the game...");
-                return;
+                return Result.LOSS;
             } else {
                 System.out.println("Incorrect input. Please, write single alphabetic letter to guess.");
             }
         }
-        System.out.println(word.isGuessed() ? "You won!" : "You lost.");
+        return word.isGuessed() ? Result.WIN : Result.LOSS;
     }
 
     @SuppressWarnings("uncommentedmain")
     public static void main(String[] args) {
-        start(ATTEMPT_AMOUNT);
+        System.out.println(start(Dictionary.getRandomWord(), ATTEMPT_AMOUNT) == Result.WIN ? "You won!" : "You lost.");
+    }
+
+    public enum Result {
+        WIN, LOSS;
     }
 }
