@@ -1,10 +1,7 @@
 package edu.project1;
 
 public class Dictionary {
-    public static final String[] WORDS = {
-        "Hello",
-        "Laptop",
-        "Storage",
-        "Security"
-    };
+    public static final String[] WORDS = {"Hello", "Laptop", "Storage", "Security"};
+
+    private Dictionary() {}
 }
