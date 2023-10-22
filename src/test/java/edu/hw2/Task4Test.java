@@ -11,7 +11,7 @@ class Task4Test {
   @DisplayName("Удалённый сервер")
   void test() {
     CallingInfo callingInfo = CallingInfo.callingInfo();
-    assertThat(callingInfo.className()).isEqualTo(CallingInfo.class.getName());
-    assertThat(callingInfo.methodName()).isEqualTo("callingInfo");
+    assertThat(callingInfo.className()).isEqualTo(Task4Test.class.getName());
+    assertThat(callingInfo.methodName()).isEqualTo("test");
   }
 }
