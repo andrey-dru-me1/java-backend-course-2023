@@ -1,7 +1,6 @@
 package edu.project1;
 
 import java.util.Scanner;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Game {
     private static final int ATTEMPT_AMOUNT = 5;
@@ -12,8 +11,7 @@ public class Game {
     @SuppressWarnings("regexpsinglelinejava")
     private static void start(int maxMistakes) {
         Scanner scanner = new Scanner(System.in);
-        HiddenWord word = new HiddenWord(
-                Dictionary.WORDS[ThreadLocalRandom.current().nextInt(Dictionary.WORDS.length)].toLowerCase());
+        HiddenWord word = new HiddenWord(Dictionary.getRandomWord());
 
         int mistakeCount = 0;
         boolean game = true;
