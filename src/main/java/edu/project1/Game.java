@@ -14,8 +14,7 @@ public class Game {
         HiddenWord word = new HiddenWord(Dictionary.getRandomWord());
 
         int mistakeCount = 0;
-        boolean game = true;
-        while (game) {
+        while (!word.isGuessed() && mistakeCount < maxMistakes) {
             System.out.println("The word: " + word);
             System.out.print("Guess a letter: ");
             String line = scanner.nextLine();
@@ -23,15 +22,9 @@ public class Game {
             if (line.length() == 1 && Character.isAlphabetic(c)) {
                 if (word.guessLetter(c)) {
                     System.out.println("Hit!");
-                    if (word.isGuessed()) {
-                        game = false;
-                    }
                 } else {
                     mistakeCount++;
                     System.out.println("Mistake " + mistakeCount + " out of " + maxMistakes + ".");
-                    if (mistakeCount >= maxMistakes) {
-                        game = false;
-                    }
                 }
             } else if (line.equals("quit") || line.equals("exit")) {
                 System.out.println("Exiting the game...");
