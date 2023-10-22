@@ -16,7 +16,6 @@ public class Rectangle {
         return width;
     }
 
-    @Contract("_ -> new")
     public @NotNull Rectangle setWidth(int width) {
         return new Rectangle(width, height);
     }
