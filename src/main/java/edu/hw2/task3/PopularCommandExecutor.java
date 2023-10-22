@@ -24,7 +24,7 @@ public final class PopularCommandExecutor {
                     break;
                 } catch (ConnectionException e) {
                     if (i >= maxAttempts) {
-                        throw e;
+                        throw new ConnectionException("Cannot connect to the server", e);
                     }
                 }
             }

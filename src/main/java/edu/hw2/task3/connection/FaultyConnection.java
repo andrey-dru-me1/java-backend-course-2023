@@ -7,7 +7,7 @@ public class FaultyConnection implements Connection {
     @Override
     public void execute(String command) {
         if (ThreadLocalRandom.current().nextInt() % 2 == 0) {
-            throw new ConnectionException();
+            throw new ConnectionException("Cannot connect to the server.");
         }
     }
 }
