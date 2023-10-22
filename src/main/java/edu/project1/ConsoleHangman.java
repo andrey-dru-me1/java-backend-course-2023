@@ -2,13 +2,13 @@ package edu.project1;
 
 import java.util.Scanner;
 
+@SuppressWarnings("regexpsinglelinejava")
 public class ConsoleHangman {
     private static final int ATTEMPT_AMOUNT = 5;
 
     private ConsoleHangman() {
     }
 
-    @SuppressWarnings("regexpsinglelinejava")
     public static Result start(String wordToGuess, int maxMistakes) {
         if (wordToGuess.isEmpty()) {
             throw new IllegalArgumentException("Cannot take zero-length word");
