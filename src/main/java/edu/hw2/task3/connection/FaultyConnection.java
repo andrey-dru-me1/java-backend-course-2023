@@ -1,7 +1,6 @@
 package edu.hw2.task3.connection;
 
 import edu.hw2.task3.ConnectionException;
-
 import java.util.concurrent.ThreadLocalRandom;
 
 public class FaultyConnection implements Connection {
