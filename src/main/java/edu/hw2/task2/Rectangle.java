@@ -1,6 +1,5 @@
 package edu.hw2.task2;
 
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public class Rectangle {
@@ -24,7 +23,6 @@ public class Rectangle {
         return height;
     }
 
-    @Contract("_ -> new")
     public @NotNull Rectangle setHeight(int height) {
         return new Rectangle(width, height);
     }
