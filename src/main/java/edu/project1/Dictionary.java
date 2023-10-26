@@ -3,12 +3,13 @@ package edu.project1;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Dictionary {
-    private static final String[] WORDS = {"Hello", "Laptop", "Storage", "Security"};
+    private final String[] words;
 
-    private Dictionary() {
+    public Dictionary(String[] words) {
+        this.words = words;
     }
 
-    public static String getRandomWord() {
-        return WORDS[ThreadLocalRandom.current().nextInt(Dictionary.WORDS.length)].toLowerCase();
+    public String getRandomWord() {
+        return words[ThreadLocalRandom.current().nextInt(words.length)].toLowerCase();
     }
 }

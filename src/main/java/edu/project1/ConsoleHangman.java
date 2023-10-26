@@ -4,18 +4,20 @@ import java.util.Scanner;
 
 @SuppressWarnings("regexpsinglelinejava")
 public class ConsoleHangman {
-    private static final int ATTEMPT_AMOUNT = 5;
+    private final HiddenWord word;
+    private final Scanner scanner;
+    private final int maxMistakes;
 
-    private ConsoleHangman() {
-    }
-
-    public static Result start(String wordToGuess, int maxMistakes) {
-        if (wordToGuess.isEmpty()) {
+    public ConsoleHangman(String word, int maxAttempts, Scanner scanner) {
+        if (word.isEmpty()) {
             throw new IllegalArgumentException("Cannot take zero-length word");
         }
-        Scanner scanner = new Scanner(System.in);
-        HiddenWord word = new HiddenWord(wordToGuess);
+        this.word = new HiddenWord(word);
+        this.scanner = scanner;
+        this.maxMistakes = maxAttempts;
+    }
 
+    public Result start() {
         int mistakeCount = 0;
         while (!word.isGuessed() && mistakeCount < maxMistakes) {
             System.out.println("The word: " + word);
@@ -31,20 +33,21 @@ public class ConsoleHangman {
                 }
             } else if (line.equals("quit") || line.equals("exit")) {
                 System.out.println("Exiting the game...");
-                return Result.LOSS;
+                return Result.LOSE;
             } else {
                 System.out.println("Incorrect input. Please, write single alphabetic letter to guess.");
             }
         }
-        return word.isGuessed() ? Result.WIN : Result.LOSS;
+        Result result;
+        if (word.isGuessed()) {
+            System.out.println("You win!");
+            result = Result.WIN;
+        } else {
+            System.out.println("You lose.");
+            result = Result.LOSE;
+        }
+        return result;
     }
 
-    @SuppressWarnings("uncommentedmain")
-    public static void main(String[] args) {
-        System.out.println(start(Dictionary.getRandomWord(), ATTEMPT_AMOUNT) == Result.WIN ? "You won!" : "You lost.");
-    }
-
-    public enum Result {
-        WIN, LOSS;
-    }
+    public enum Result { WIN, LOSE }
 }

@@ -1,51 +1,46 @@
 package edu.project1;
 
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayInputStream;
+import java.util.Scanner;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ConsoleHangmanTest {
 
     @Test
     void testClearWin() {
-        String guessingWord = "w\no\nr\nd\n";
-        System.setIn(new ByteArrayInputStream(guessingWord.getBytes()));
-        assertThat(ConsoleHangman.start("word", 1)).isEqualTo(ConsoleHangman.Result.WIN);
+        assertThat(new ConsoleHangman("word", 1, new Scanner("w\no\nr\nd\n")).start()).isEqualTo(
+                ConsoleHangman.Result.WIN);
     }
 
     @Test
     void testWin() {
-        String guessingWord = "w\nh\nj\no\nr\nd\n";
-        System.setIn(new ByteArrayInputStream(guessingWord.getBytes()));
-        assertThat(ConsoleHangman.start("word", 3)).isEqualTo(ConsoleHangman.Result.WIN);
+        assertThat(new ConsoleHangman("word", 3, new Scanner("w\nh\nj\no\nr\nd\n")).start()).isEqualTo(
+                ConsoleHangman.Result.WIN);
     }
 
     @Test
     void testClearLoss() {
-        String guessingWord = "w\no\nr\na\n";
-        System.setIn(new ByteArrayInputStream(guessingWord.getBytes()));
-        assertThat(ConsoleHangman.start("word", 1)).isEqualTo(ConsoleHangman.Result.LOSS);
+        assertThat(new ConsoleHangman("word", 1, new Scanner("w\no\nr\na\n")).start()).isEqualTo(
+                ConsoleHangman.Result.LOSE);
     }
 
     @Test
     void testLoss() {
-        String guessingWord = "a\nb\nc\nd\ne\nf\ng\n";
-        System.setIn(new ByteArrayInputStream(guessingWord.getBytes()));
-        assertThat(ConsoleHangman.start("word", 5)).isEqualTo(ConsoleHangman.Result.LOSS);
+        assertThat(new ConsoleHangman("word", 5, new Scanner("a\nb\nc\nd\ne\nf\ng\n")).start()).isEqualTo(
+                ConsoleHangman.Result.LOSE);
     }
 
     @Test
     void testWrongInput() {
-        String guessingWord = "w\n4\ntt\no\nr\nd\n";
-        System.setIn(new ByteArrayInputStream(guessingWord.getBytes()));
-        assertThat(ConsoleHangman.start("word", 1)).isEqualTo(ConsoleHangman.Result.WIN);
+        assertThat(new ConsoleHangman("word", 1, new Scanner("w\n4\ntt\no\nr\nd\n")).start()).isEqualTo(
+                ConsoleHangman.Result.WIN);
     }
 
     @Test
     void testIllegalArgument() {
-        assertThrows(IllegalArgumentException.class, () -> ConsoleHangman.start("", 1));
+        Scanner scanner = new Scanner("");
+        assertThrows(IllegalArgumentException.class, () -> new ConsoleHangman("", 1, scanner));
     }
 }
