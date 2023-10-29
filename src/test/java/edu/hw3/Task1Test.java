@@ -12,5 +12,6 @@ class Task1Test {
         assertThat(Task1.atbash(
                 "Any fool can write code that a computer can understand. Good programmers write code that humans can understand. ― Martin Fowler")).isEqualTo(
                 "Zmb ullo xzm dirgv xlwv gszg z xlnkfgvi xzm fmwvihgzmw. Tllw kiltiznnvih dirgv xlwv gszg sfnzmh xzm fmwvihgzmw. ― Nzigrm Uldovi");
+        assertThat(Task1.atbash("")).isEmpty();
     }
 }
