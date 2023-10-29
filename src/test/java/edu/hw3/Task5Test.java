@@ -3,6 +3,7 @@ package edu.hw3;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class Task5Test {
 
@@ -16,5 +17,7 @@ class Task5Test {
         assertThat(Task5.parseContacts(null, "DESC")).isEqualTo(new String[]{});
         assertThat(Task5.parseContacts(new String[]{"Paul Erdos", "Euler", "Carl Gauss"}, "DESC")).isEqualTo(
                 new String[]{"Carl Gauss", "Euler", "Paul Erdos"});
+        assertThrows(IllegalArgumentException.class,
+                () -> Task5.parseContacts(new String[]{"Paul Erdos", "Euler", "Carl Gauss"}, "ABC"));
     }
 }
