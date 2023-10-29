@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class Task4Test {
     @Test
-    void convertToRoman() {
+    void testConvertToRoman() {
         assertThat(Task4.convertToRoman(3999)).isEqualTo("MMMCMXCIX");
         assertThat(Task4.convertToRoman(2)).isEqualTo("II");
         assertThat(Task4.convertToRoman(12)).isEqualTo("XII");

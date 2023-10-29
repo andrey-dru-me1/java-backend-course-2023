@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class Task6Test {
 
     @Test
-    void parseContacts() {
+    void testStockMarket() {
         StockMarket stockMarket = new DefaultStockMarket();
         stockMarket.add(new Stock(3));
         stockMarket.add(new Stock(5));

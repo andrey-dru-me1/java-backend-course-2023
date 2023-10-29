@@ -9,7 +9,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class Task3Test {
     @Test
-    void freqDict() {
+    void testFreqDict() {
         assertThat(Task3.freqDict(new String[]{"a", "bb", "a", "bb"}).entrySet()).isEqualTo(
                 new HashSet<>(List.of(new AbstractMap.SimpleEntry<>("a", 2), new AbstractMap.SimpleEntry<>("bb", 2))));
         assertThat(Task3.freqDict(new String[]{"this", "and", "that", "and"}).entrySet()).isEqualTo(new HashSet<>(

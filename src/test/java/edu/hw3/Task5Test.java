@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class Task5Test {
 
     @Test
-    void parseContacts() {
+    void testParseContacts() {
         assertThat(Task5.parseContacts(new String[]{"John Locke", "Thomas Aquinas", "David Hume", "Rene Descartes"},
                 "ASC")).isEqualTo(new String[]{"Thomas Aquinas", "Rene Descartes", "David Hume", "John Locke"});
         assertThat(Task5.parseContacts(new String[]{"Paul Erdos", "Leonhard Euler", "Carl Gauss"}, "DESC")).isEqualTo(
