@@ -2,6 +2,7 @@ package edu.hw3;
 
 import java.util.List;
 
+@SuppressWarnings("magicnumber")
 public class Task4 {
     private static final List<Point<Integer, String>> ROMAN_UNITS =
             List.of(new Point<>(1, "I"), new Point<>(4, "IV"), new Point<>(5, "V"), new Point<>(9, "IX"),
@@ -13,17 +14,18 @@ public class Task4 {
     }
 
     public static String convertToRoman(int number) {
-        if (!(number > 0 && number < 4000)) {
+        int num = number;
+        if (!(num > 0 && num < 4000)) {
             throw new IllegalArgumentException();
         }
         StringBuilder stringBuilder = new StringBuilder();
-        while (number > 0) {
+        while (num > 0) {
             int i = 0;
-            while (i < ROMAN_UNITS.size() && ROMAN_UNITS.get(i).key() > number) {
+            while (i < ROMAN_UNITS.size() && ROMAN_UNITS.get(i).key() > num) {
                 i++;
             }
             stringBuilder.append(ROMAN_UNITS.get(i).val());
-            number -= ROMAN_UNITS.get(i).key;
+            num -= ROMAN_UNITS.get(i).key;
         }
         return stringBuilder.toString();
     }

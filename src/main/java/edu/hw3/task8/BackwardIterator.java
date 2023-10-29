@@ -6,6 +6,7 @@ import java.util.ListIterator;
 
 public class BackwardIterator<E, T extends Collection<E>> implements Iterator<E> {
     private final ListIterator<E> iterator;
+
     public BackwardIterator(T collection) {
         this.iterator = collection.stream().toList().listIterator(collection.size());
     }

@@ -9,7 +9,7 @@ public class Task3 {
 
     public static <T> Map<T, Integer> freqDict(T[] array) {
         Map<T, Integer> res = new HashMap<>();
-        for(T o : array) {
+        for (T o : array) {
             res.putIfAbsent(o, 0);
             res.put(o, res.get(o) + 1);
         }
