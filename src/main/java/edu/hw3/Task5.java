@@ -2,6 +2,7 @@ package edu.hw3;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Objects;
 
 public class Task5 {
     private static final String ASC = "ASC";
@@ -10,9 +11,9 @@ public class Task5 {
     private Task5() {
     }
 
-    public static Object[] parseContacts(String[] contacts, String ordering) {
+    public static Contact[] parseContacts(String[] contacts, String ordering) {
         if (contacts == null) {
-            return new String[]{};
+            return new Contact[]{};
         }
         if (!(ordering.equals(ASC) || ordering.equals(DESC))) {
             throw new IllegalArgumentException(
@@ -25,6 +26,39 @@ public class Task5 {
         if (ordering.equals(DESC)) {
             comp = comp.reversed();
         }
-        return Arrays.stream(contacts).sorted(comp).toArray();
+        return Arrays.stream(contacts).sorted(comp).map(Contact::new).toArray(Contact[]::new);
+    }
+
+    public static class Contact {
+        private final String firstName;
+        private final String lastName;
+
+        public Contact(String name) {
+            String[] tokens = name.split(" ");
+            firstName = tokens[0];
+            lastName = (tokens.length > 1) ? tokens[1] : null;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof Contact contact)) {
+                return false;
+            }
+            return Objects.equals(firstName, contact.firstName) && Objects.equals(lastName, contact.lastName);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(firstName, lastName);
+        }
+
+        @Override
+        public String toString() {
+            return firstName + ((lastName == null) ? "" : " " + lastName);
+        }
+
     }
 }
