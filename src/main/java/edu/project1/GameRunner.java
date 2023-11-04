@@ -11,7 +11,9 @@ public class GameRunner {
 
     @SuppressWarnings("uncommentedmain")
     public static void main(String[] args) {
-        new ConsoleHangman(new Dictionary(new String[]{"Hello", "Security", "Socket", "Connection"}).getRandomWord(),
-                MAX_ATTEMPTS, new Scanner(System.in)).start();
+        Dictionary dictionary = new Dictionary(new String[] {"Hello", "Security", "Socket", "Connection"});
+        Scanner scanner = new Scanner(System.in);
+        ConsoleHangman consoleHangman = new ConsoleHangman(dictionary.getRandomWord(), MAX_ATTEMPTS, scanner);
+        consoleHangman.start();
     }
 }
