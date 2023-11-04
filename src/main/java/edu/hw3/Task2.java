@@ -14,7 +14,7 @@ public class Task2 {
         while (i < input.length()) {
             int openParenthesis = 0;
             if (inputChars[i] != '(') {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("First symbol of an input string should be a open parenthesis");
             }
             openParenthesis++;
             StringBuilder stringBuilder = new StringBuilder();
@@ -22,7 +22,7 @@ public class Task2 {
             i++;
             while (openParenthesis > 0) {
                 if (i >= inputChars.length) {
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException("Each open parenthesis should has a close parenthesis");
                 }
                 char c = inputChars[i++];
                 if (c == '(') {

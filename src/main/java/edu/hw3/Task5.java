@@ -15,7 +15,8 @@ public class Task5 {
             return new String[]{};
         }
         if (!(ordering.equals(ASC) || ordering.equals(DESC))) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(
+                    "Argument `ordering` should match either " + ASC + " or " + DESC + " string");
         }
         Comparator<String> comp = Comparator.comparing(n -> {
             String[] tokens = n.split(" ");
