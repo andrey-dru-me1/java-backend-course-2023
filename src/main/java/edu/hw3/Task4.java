@@ -15,7 +15,7 @@ public class Task4 {
 
     public static String convertToRoman(int number) {
         int num = number;
-        if (!(num > 0 && num < 4000)) {
+        if (num <= 0 || num >= 4000) {
             throw new IllegalArgumentException("Input number should lie in an interval from 0 to 4000 (both excluded)");
         }
         StringBuilder stringBuilder = new StringBuilder();
