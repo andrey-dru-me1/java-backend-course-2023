@@ -8,7 +8,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class HW4Test {
 
-    private final List<Animal> animals = List.of(new Animal("Cat1", Animal.Type.CAT, Animal.Sex.M, 3, 5, 6, true),
+    private final List<Animal> animals = List.of(new Animal("Cat1", Animal.Type.CAT, Animal.Sex.F, 3, 5, 6, true),
             new Animal("Dog1", Animal.Type.DOG, Animal.Sex.M, 4, 4, 5, true),
             new Animal("Bird1", Animal.Type.BIRD, Animal.Sex.F, 2, 2, 2, false),
             new Animal("Fish1", Animal.Type.FISH, Animal.Sex.F, 1, 1, 1, false),
@@ -34,5 +34,22 @@ public class HW4Test {
         assertThat(HW4.task3(animals)).isEqualTo(
                 Map.of(Animal.Type.DOG, 1, Animal.Type.CAT, 3, Animal.Type.FISH, 2, Animal.Type.BIRD, 1,
                         Animal.Type.SPIDER, 1));
+    }
+
+    @Test
+    void testTask4() {
+        assertThat(HW4.task4(animals).name()).isEqualTo("Spider1");
+    }
+
+    @Test
+    void testTask5() {
+        assertThat(HW4.task5(animals)).isEqualTo(Animal.Sex.F);
+    }
+
+    @Test
+    void testTask6() {
+        assertThat(HW4.task6(animals)).isEqualTo(
+                Map.of(Animal.Type.DOG, animals.get(1), Animal.Type.CAT, animals.get(5), Animal.Type.FISH,
+                        animals.get(7), Animal.Type.BIRD, animals.get(2), Animal.Type.SPIDER, animals.get(4)));
     }
 }
