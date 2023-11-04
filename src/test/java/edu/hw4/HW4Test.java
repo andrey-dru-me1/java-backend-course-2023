@@ -117,4 +117,15 @@ public class HW4Test {
                 new Animal("Dog2", Animal.Type.DOG, Animal.Sex.F, 0, 0, 0, false),
                 new Animal("Dog3", Animal.Type.DOG, Animal.Sex.F, 0, 0, 0, false)))).isTrue();
     }
+
+    @Test
+    void testTask18() {
+        Animal expected = new Animal("Fish2", Animal.Type.FISH, Animal.Sex.F, 0, 0, 100500, false);
+        assertThat(HW4.task18(List.of(List.of(new Animal("Fish1", Animal.Type.FISH, Animal.Sex.F, 0, 0, 1, false),
+                        new Animal("Fish2", Animal.Type.FISH, Animal.Sex.F, 0, 0, 159, false)),
+                List.of(new Animal("Fish3", Animal.Type.FISH, Animal.Sex.F, 0, 0, 71, false), expected,
+                        new Animal("Fish4", Animal.Type.FISH, Animal.Sex.F, 0, 0, 15, false)),
+                List.of(new Animal("Fish5", Animal.Type.FISH, Animal.Sex.F, 0, 0, 2, false),
+                        new Animal("Fish6", Animal.Type.FISH, Animal.Sex.F, 0, 0, 3, false))))).isEqualTo(expected);
+    }
 }

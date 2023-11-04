@@ -125,4 +125,16 @@ public class HW4 {
 
         return (double) spiderBitesCount / spiders.size() > (double) dogBitesCount / dogs.size();
     }
+
+    // Найти самую тяжелую рыбку в 2-х или более списках -> Animal
+    public static Animal task18(List<List<Animal>> animalLists) {
+        Comparator<Animal> fishComparator = Comparator.comparing(Animal::weight);
+        return animalLists.stream()
+                .map((List<Animal> animalList) -> animalList.stream()
+                        .filter((Animal animal) -> animal.type() == Animal.Type.FISH)
+                        .max(fishComparator)
+                        .orElseThrow())
+                .max(fishComparator)
+                .orElseThrow();
+    }
 }
