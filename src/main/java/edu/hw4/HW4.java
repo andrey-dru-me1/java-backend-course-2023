@@ -1,8 +1,10 @@
 package edu.hw4;
 
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -136,5 +138,22 @@ public class HW4 {
                         .orElseThrow())
                 .max(fishComparator)
                 .orElseThrow();
+    }
+
+    // Животные, в записях о которых есть ошибки: вернуть имя и список ошибок -> Map<String, Set<ValidationError>>.
+    public static Map<String, Set<ValidationError>> task19(List<Animal> animals) {
+        return animals.stream().collect(Collectors.toMap(Animal::name, (Animal animal) -> {
+            Set<ValidationError> result = new HashSet<>();
+            if (animal.age() < 0) {
+                result.add(ValidationError.INCORRECT_AGE);
+            }
+            if (animal.weight() <= 0) {
+                result.add(ValidationError.INCORRECT_WEIGHT);
+            }
+            if (animal.height() <= 0) {
+                result.add(ValidationError.INCORRECT_HEIGHT);
+            }
+            return result;
+        }));
     }
 }

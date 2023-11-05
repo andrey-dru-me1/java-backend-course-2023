@@ -1,8 +1,9 @@
 package edu.hw4;
 
-import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -127,5 +128,19 @@ public class HW4Test {
                         new Animal("Fish4", Animal.Type.FISH, Animal.Sex.F, 0, 0, 15, false)),
                 List.of(new Animal("Fish5", Animal.Type.FISH, Animal.Sex.F, 0, 0, 2, false),
                         new Animal("Fish6", Animal.Type.FISH, Animal.Sex.F, 0, 0, 3, false))))).isEqualTo(expected);
+    }
+
+    @Test
+    void testTask19() {
+        List<Animal> animalList = List.of(new Animal("Cat", Animal.Type.CAT, Animal.Sex.F, 0, 1, 1, false),
+                new Animal("Dog", Animal.Type.DOG, Animal.Sex.F, -16, 1, 1, false),
+                new Animal("Fish", Animal.Type.FISH, Animal.Sex.F, -1, 0, -1, false),
+                new Animal("Spider", Animal.Type.SPIDER, Animal.Sex.F, -12, 2, -10, false));
+        Map<String, Set<ValidationError>> expected =
+                Map.of("Cat", Set.of(), "Dog", Set.of(ValidationError.INCORRECT_AGE), "Fish",
+                        Set.of(ValidationError.INCORRECT_AGE, ValidationError.INCORRECT_HEIGHT,
+                                ValidationError.INCORRECT_WEIGHT), "Spider",
+                        Set.of(ValidationError.INCORRECT_AGE, ValidationError.INCORRECT_WEIGHT));
+        assertThat(HW4.task19(animalList)).isEqualTo(expected);
     }
 }
