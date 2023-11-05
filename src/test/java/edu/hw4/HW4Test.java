@@ -132,15 +132,42 @@ public class HW4Test {
 
     @Test
     void testTask19() {
-        List<Animal> animalList = List.of(new Animal("Cat", Animal.Type.CAT, Animal.Sex.F, 0, 1, 1, false),
+        List<Animal> animalList = List.of(
+                new Animal("Cat", Animal.Type.CAT, Animal.Sex.F, 0, 1, 1, false),
                 new Animal("Dog", Animal.Type.DOG, Animal.Sex.F, -16, 1, 1, false),
                 new Animal("Fish", Animal.Type.FISH, Animal.Sex.F, -1, 0, -1, false),
-                new Animal("Spider", Animal.Type.SPIDER, Animal.Sex.F, -12, 2, -10, false));
+                new Animal("Spider", Animal.Type.SPIDER, Animal.Sex.F, -12, 2, -10, false)
+        );
         Map<String, Set<ValidationError>> expected =
-                Map.of("Cat", Set.of(), "Dog", Set.of(ValidationError.INCORRECT_AGE), "Fish",
-                        Set.of(ValidationError.INCORRECT_AGE, ValidationError.INCORRECT_HEIGHT,
-                                ValidationError.INCORRECT_WEIGHT), "Spider",
-                        Set.of(ValidationError.INCORRECT_AGE, ValidationError.INCORRECT_WEIGHT));
+                Map.of(
+                        "Cat", Set.of(),
+                        "Dog", Set.of(ValidationError.INCORRECT_AGE),
+                        "Fish",
+                        Set.of(
+                                ValidationError.INCORRECT_AGE,
+                                ValidationError.INCORRECT_HEIGHT,
+                                ValidationError.INCORRECT_WEIGHT
+                        ),
+                        "Spider",
+                        Set.of(ValidationError.INCORRECT_AGE, ValidationError.INCORRECT_WEIGHT)
+                );
         assertThat(HW4.task19(animalList)).isEqualTo(expected);
+    }
+
+    @Test
+    void testTask20() {
+        List<Animal> animalList = List.of(
+                new Animal("Cat", Animal.Type.CAT, Animal.Sex.F, 0, 1, 1, false),
+                new Animal("Dog", Animal.Type.DOG, Animal.Sex.F, -16, 1, 1, false),
+                new Animal("Fish", Animal.Type.FISH, Animal.Sex.F, -1, 0, -1, false),
+                new Animal("Spider", Animal.Type.SPIDER, Animal.Sex.F, -12, 2, -10, false)
+        );
+        Map<String, String> expected =
+                Map.of("Cat", "",
+                        "Dog", "age",
+                        "Fish", "age height weight",
+                        "Spider", "age weight"
+                );
+        assertThat(HW4.task20(animalList)).isEqualTo(expected);
     }
 }

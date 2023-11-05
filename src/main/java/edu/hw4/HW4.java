@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringJoiner;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -154,6 +155,24 @@ public class HW4 {
                 result.add(ValidationError.INCORRECT_HEIGHT);
             }
             return result;
+        }));
+    }
+
+    // Сделать результат предыдущего задания более читабельным:
+    // вернуть имя и названия полей с ошибками, объединенные в строку -> Map<String, String>
+    public static Map<String, String> task20(List<Animal> animals) {
+        return animals.stream().collect(Collectors.toMap(Animal::name, (Animal animal) -> {
+            StringJoiner stringJoiner = new StringJoiner(" ");
+            if (animal.age() < 0) {
+                stringJoiner.add("age");
+            }
+            if (animal.height() <= 0) {
+                stringJoiner.add("height");
+            }
+            if (animal.weight() <= 0) {
+                stringJoiner.add("weight");
+            }
+            return stringJoiner.toString();
         }));
     }
 }
