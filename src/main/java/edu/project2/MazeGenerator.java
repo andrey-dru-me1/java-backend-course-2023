@@ -19,11 +19,11 @@ public class MazeGenerator {
         for(int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if(i % 2 == 1 && j % 2 == 1) {
-                    maze.field()[i][j] = new Cell(new Point(i, j), Cell.Type.EMPTY);
+                    maze.field()[i][j] = new Cell(new Point(j, i), Cell.Type.EMPTY);
                     unvisited.add(maze.field()[i][j]);
                 }
                 else {
-                    maze.field()[i][j] = new Cell(new Point(i, j), Cell.Type.WALL);
+                    maze.field()[i][j] = new Cell(new Point(j, i), Cell.Type.WALL);
                 }
             }
         }
@@ -35,41 +35,43 @@ public class MazeGenerator {
         int height = maze.height();
 
         Stack<Cell> cellsWithNeighbours = new Stack<>();
-        cellsWithNeighbours.add(field[1][1]);
+        Cell current = field[1][1];
+        unvisited.remove(field[1][1]);
         while(!unvisited.isEmpty()) {
-            Cell current = cellsWithNeighbours.pop();
-
             int x = current.point().x();
             int y = current.point().y();
 
-            unvisited.remove(field[x][y]);
-
             List<Cell> nexts = new ArrayList<>(4);
-            boolean hasUnvisitedNeighbours = false;
             if(x > 1 && unvisited.contains(field[y][x - 2])) {
                 nexts.add(field[y][x - 2]);
-                hasUnvisitedNeighbours = true;
             }
             if(x + 2 < width && unvisited.contains(field[y][x + 2])) {
                 nexts.add(field[y][x + 2]);
-                hasUnvisitedNeighbours = true;
             }
             if(y > 1 && unvisited.contains(field[y - 2][x])) {
                 nexts.add(field[y - 2][x]);
-                hasUnvisitedNeighbours = true;
             }
             if(y + 2 < height && unvisited.contains(field[y + 2][x])) {
                 nexts.add(field[y + 2][x]);
-                hasUnvisitedNeighbours = true;
             }
-            Cell next = nexts.get(ThreadLocalRandom.current().nextInt(nexts.size()));
-            int wallY = (y + next.point().y()) / 2;
-            int wallX = (x + next.point().x()) / 2;
-            field[wallY][wallX] = new Cell(field[wallY][wallX].point(), Cell.Type.WALL);
+            if(!nexts.isEmpty()) {
+                cellsWithNeighbours.push(current);
+                Cell next = nexts.get(ThreadLocalRandom.current().nextInt(nexts.size()));
+                int wallY = (y + next.point().y()) / 2;
+                int wallX = (x + next.point().x()) / 2;
+                field[wallY][wallX] = new Cell(field[wallY][wallX].point(), Cell.Type.EMPTY);
+                current = next;
+                unvisited.remove(current);
+            } else if(!cellsWithNeighbours.isEmpty()) {
+                current = cellsWithNeighbours.pop();
+                unvisited.remove(current);
+            }
         }
     }
 
     public static Maze generate(int height, int width) {
-        return new MazeGenerator(height * 2 + 1, width * 2 + 1).maze;
+        MazeGenerator mazeGenerator = new MazeGenerator(height * 2 + 1, width * 2 + 1);
+        mazeGenerator.fillField();
+        return mazeGenerator.maze;
     }
 }
