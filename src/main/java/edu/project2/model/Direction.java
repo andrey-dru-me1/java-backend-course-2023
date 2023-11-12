@@ -1,6 +1,8 @@
-package edu.project2;
+package edu.project2.model;
 
-public enum Direction { TOP, RIGHT, BOTTOM, LEFT;
+public enum Direction {
+    TOP, RIGHT, BOTTOM, LEFT;
+
     public boolean isHorizontal() {
         return switch (this) {
             case RIGHT, LEFT -> true;

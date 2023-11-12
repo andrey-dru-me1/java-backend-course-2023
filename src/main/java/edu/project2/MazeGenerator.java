@@ -1,5 +1,9 @@
 package edu.project2;
 
+import edu.project2.model.Cell;
+import edu.project2.model.Direction;
+import edu.project2.model.Maze;
+import edu.project2.model.Point;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +21,7 @@ public class MazeGenerator {
         unvisited = new HashSet<>();
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                maze.grid()[i][j] = new Cell(true, true);
+                maze.grid()[i][j] = new Cell(Cell.WallState.WALL, Cell.WallState.WALL);
                 unvisited.add(new Point(i, j));
             }
         }
@@ -46,7 +50,7 @@ public class MazeGenerator {
                 cellsWithNeighbours.push(current);
                 Direction direction =
                         availableDirections.get(ThreadLocalRandom.current().nextInt(availableDirections.size()));
-                maze.setIncidentWall(current, direction, false);
+                maze.setIncidentWall(current, direction, Cell.WallState.PASSAGE);
                 current = current.constructAdjacent(direction);
                 unvisited.remove(current);
             } else if (!cellsWithNeighbours.isEmpty()) {

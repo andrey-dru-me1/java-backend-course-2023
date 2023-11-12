@@ -1,5 +1,9 @@
 package edu.project2;
 
+import edu.project2.model.Cell;
+import edu.project2.model.Direction;
+import edu.project2.model.Maze;
+import edu.project2.model.Point;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,7 +27,7 @@ public class MazeSolver {
         while (!new Point(width - 1, height - 1).equals(current)) {
             for (Direction d : Direction.values()) {
                 Point next = current.constructAdjacent(d);
-                if (!maze.getIncidentWallState(current, d) && !black.contains(next)) {
+                if (maze.getIncidentWallState(current, d) == Cell.WallState.PASSAGE && !black.contains(next)) {
                     gray.add(next);
                     previousPoints[next.row()][next.col()] = current;
                 }

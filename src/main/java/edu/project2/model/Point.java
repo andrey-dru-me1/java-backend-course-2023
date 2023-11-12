@@ -1,4 +1,4 @@
-package edu.project2;
+package edu.project2.model;
 
 public record Point(int row, int col) {
     public Point constructAdjacent(Direction d) {

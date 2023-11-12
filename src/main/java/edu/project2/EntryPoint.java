@@ -1,5 +1,7 @@
 package edu.project2;
 
+import edu.project2.model.Maze;
+
 public class EntryPoint {
     private EntryPoint() {
     }

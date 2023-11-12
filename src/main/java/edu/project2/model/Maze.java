@@ -1,4 +1,4 @@
-package edu.project2;
+package edu.project2.model;
 
 public record Maze(int height, int width, Cell[][] grid) {
     public boolean checkConstraints(Point p) {
@@ -13,23 +13,23 @@ public record Maze(int height, int width, Cell[][] grid) {
         };
     }
 
-    public void setIncidentWall(Point p, Direction d, boolean isWall) {
+    public void setIncidentWall(Point p, Direction d, Cell.WallState wallState) {
         Point next = getPointContainsIncidentWall(p, d);
         Cell currentState = grid[next.row()][next.col()];
         if (d.isVertical()) {
-            grid[next.row()][next.col()] = new Cell(isWall, currentState.leftWall());
+            grid[next.row()][next.col()] = new Cell(wallState, currentState.leftWall());
         } else {
-            grid[next.row()][next.col()] = new Cell(currentState.topWall(), isWall);
+            grid[next.row()][next.col()] = new Cell(currentState.topWall(), wallState);
         }
     }
 
-    public boolean getIncidentWallState(Point p, Direction d) {
+    public Cell.WallState getIncidentWallState(Point p, Direction d) {
         Point next = getPointContainsIncidentWall(p, d);
         if (!this.checkConstraints(next)) {
-            return true;
+            return Cell.WallState.WALL;
         }
 
-        boolean result;
+        Cell.WallState result;
         if (d.isVertical()) {
             result = grid[next.row()][next.col()].topWall();
         } else {
