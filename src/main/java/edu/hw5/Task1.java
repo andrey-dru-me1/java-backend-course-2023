@@ -9,6 +9,9 @@ public class Task1 {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm");
 
+    private Task1() {
+    }
+
     public static Duration calculateAverage(List<String> log) {
         Duration sum = Duration.ZERO;
         for (String entry : log) {

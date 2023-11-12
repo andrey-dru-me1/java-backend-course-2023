@@ -4,6 +4,9 @@ import java.util.regex.Pattern;
 
 public class Task7 {
 
+    private Task7() {
+    }
+
     public static boolean isThirdZero(String string) {
         Pattern pattern = Pattern.compile("^[01]{2}0[01]*$");
         return pattern.matcher(string).matches();

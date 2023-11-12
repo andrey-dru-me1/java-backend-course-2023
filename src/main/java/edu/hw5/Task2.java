@@ -7,7 +7,11 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("magicnumber")
 public class Task2 {
+
+    private Task2() {
+    }
 
     public static LocalDate[] searchForFridays13(int year) {
         List<LocalDate> result = new ArrayList<>();

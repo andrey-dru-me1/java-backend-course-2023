@@ -4,6 +4,9 @@ import java.util.regex.Pattern;
 
 public class Task8 {
 
+    private Task8() {
+    }
+
     public static boolean oddLength(String string) {
         Pattern pattern = Pattern.compile("^([01]{2})*[01]$");
         return pattern.matcher(string).matches();
