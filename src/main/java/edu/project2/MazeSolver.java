@@ -15,43 +15,27 @@ public class MazeSolver {
     public static List<Point> solve(Maze maze) {
         int height = maze.height();
         int width = maze.width();
-        Cell[][] field = maze.field();
 
         Queue<Point> gray = new ArrayDeque<>();
         Set<Point> black = new HashSet<>();
-        Point current = new Point(1, 1);
+        Point current = new Point(0, 0);
         Point[][] previousPoints = new Point[height][width];
-        while (!new Point(width - 2, height - 2).equals(current)) {
-            int x = current.x();
-            int y = current.y();
-            Point point = new Point(x, y + 2);
-            if (field[y + 1][x].type() == Cell.Type.EMPTY && !black.contains(point)) {
-                gray.add(point);
-                previousPoints[point.y()][point.x()] = current;
-            }
-            point = new Point(x, y - 2);
-            if (field[y - 1][x].type() == Cell.Type.EMPTY && !black.contains(point)) {
-                gray.add(point);
-                previousPoints[point.y()][point.x()] = current;
-            }
-            point = new Point(x - 2, y);
-            if (field[y][x - 1].type() == Cell.Type.EMPTY && !black.contains(point)) {
-                gray.add(point);
-                previousPoints[point.y()][point.x()] = current;
-            }
-            point = new Point(x + 2, y);
-            if (field[y][x + 1].type() == Cell.Type.EMPTY && !black.contains(point)) {
-                gray.add(point);
-                previousPoints[point.y()][point.x()] = current;
+        while (!new Point(width - 1, height - 1).equals(current)) {
+            for (Direction d : Direction.values()) {
+                Point next = current.constructAdjacent(d);
+                if (!maze.getIncidentWallState(current, d) && !black.contains(next)) {
+                    gray.add(next);
+                    previousPoints[next.row()][next.col()] = current;
+                }
             }
             black.add(current);
             current = gray.poll();
         }
         List<Point> trace = new ArrayList<>();
-        current = new Point(width - 2, height - 2);
-        while (!current.equals(new Point(1, 1))) {
+        current = new Point(width - 1, height - 1);
+        while (!current.equals(new Point(0, 0))) {
             trace.add(current);
-            current = previousPoints[current.y()][current.x()];
+            current = previousPoints[current.row()][current.col()];
         }
         trace.add(current);
         return trace.reversed();
