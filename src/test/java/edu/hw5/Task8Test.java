@@ -61,6 +61,7 @@ class Task8Test {
         assertThat(Task8.eachOddIsOne("incorrect")).isFalse();
         assertThat(Task8.eachOddIsOne("101k1")).isFalse();
         assertThat(Task8.eachOddIsOne("101111101")).isTrue();
+        assertThat(Task8.eachOddIsOne("1011111011")).isTrue();
         assertThat(Task8.eachOddIsOne("101111001")).isFalse();
         assertThat(Task8.eachOddIsOne("")).isTrue();
     }
