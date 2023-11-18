@@ -133,10 +133,8 @@ public class HW4 {
     public static Animal task18(List<List<Animal>> animalLists) {
         Comparator<Animal> fishComparator = Comparator.comparing(Animal::weight);
         return animalLists.stream()
-                .map((List<Animal> animalList) -> animalList.stream()
-                        .filter((Animal animal) -> animal.type() == Animal.Type.FISH)
-                        .max(fishComparator)
-                        .orElseThrow())
+                .flatMap((List<Animal> animalList) -> animalList.stream()
+                        .filter((Animal animal) -> animal.type() == Animal.Type.FISH))
                 .max(fishComparator)
                 .orElseThrow();
     }
