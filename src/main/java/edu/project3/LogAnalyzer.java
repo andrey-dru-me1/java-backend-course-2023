@@ -47,12 +47,15 @@ public class LogAnalyzer {
         return logEntries;
     }
 
-    private static void analyzeLog(Path path) throws IOException {
-        List<LogEntry> logEntries = readLog(path);
+    private static void printCommonInformationTable(List<LogEntry> logEntries, String filename) {
+        System.out.printf("### Common information%n%n");
+        System.out.printf("|%25s|%20s|%n", "Metric", "Value");
+        System.out.printf("|%25s|%20s|%n", ":" + "-".repeat(23) + ":", ":" + "-".repeat(18) + ":");
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 
         Map<String, String> commonInformation = new HashMap<>();
-        commonInformation.put("File", path.getFileName().toString());
+        commonInformation.put("File", filename);
         commonInformation.put("Initial date", formatter.format(logEntries.getFirst().timeLocal));
         commonInformation.put("Last date", formatter.format(logEntries.getLast().timeLocal));
         commonInformation.put("Request count", String.format("%d", logEntries.size()));
@@ -62,6 +65,13 @@ public class LogAnalyzer {
         for (Map.Entry<String, String> entry : commonInformation.entrySet()) {
             System.out.printf("|%25s|%20s|%n", entry.getKey(), entry.getValue());
         }
+        System.out.printf("%n%n");
+    }
+
+    private static void printRequestedResourcesTable(List<LogEntry> logEntries) {
+        System.out.printf("### Requested resources%n%n");
+        System.out.printf("|%25s|%8s|%n", "Resource", "Count");
+        System.out.printf("|%25s|%8s|%n", ":" + "-".repeat(23) + ":", ":" + "-".repeat(6) + ":");
 
         Pattern requestPattern = Pattern.compile(".*? (?<resource>.*?) .*?");
         Map<String, Integer> resourceCount = new HashMap<>();
@@ -76,6 +86,33 @@ public class LogAnalyzer {
         for (Map.Entry<String, Integer> entry : resourceCount.entrySet()) {
             System.out.printf("|%25s|%8d|%n", entry.getKey(), entry.getValue());
         }
+        System.out.printf("%n%n");
+    }
+
+    private static void printResponseCodesTable(List<LogEntry> logEntries) {
+        System.out.printf("### Response codes%n%n");
+        System.out.printf("|%8s|%8s|%n", "Code", "Count");
+        System.out.printf("|%8s|%8s|%n", ":" + "-".repeat(6) + ":", ":" + "-".repeat(6) + ":");
+
+        Map<Integer, Integer> codeCount = new HashMap<>();
+        for (LogEntry logEntry : logEntries) {
+            codeCount.putIfAbsent(logEntry.status, 0);
+            codeCount.computeIfPresent(logEntry.status, (key, value) -> value + 1);
+        }
+        for (Map.Entry<Integer, Integer> entry : codeCount.entrySet()) {
+            System.out.printf("|%8d|%8d|%n", entry.getKey(), entry.getValue());
+        }
+        System.out.printf("%n%n");
+    }
+
+    private static void analyzeLog(Path path) throws IOException {
+        List<LogEntry> logEntries = readLog(path);
+
+        printCommonInformationTable(logEntries, path.getFileName().toString());
+
+        printRequestedResourcesTable(logEntries);
+
+        printResponseCodesTable(logEntries);
 
     }
 
