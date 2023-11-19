@@ -7,11 +7,13 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.zip.CRC32C;
 import java.util.zip.CheckedOutputStream;
 
 public class Task4 {
+
+    private Task4() {
+    }
 
     private final static String MESSAGE = "Programming is learned by writing programs. ― Brian Kernighan";
 

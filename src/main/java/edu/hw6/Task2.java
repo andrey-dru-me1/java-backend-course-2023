@@ -7,6 +7,9 @@ import java.nio.file.StandardCopyOption;
 
 public class Task2 {
 
+    private Task2() {
+    }
+
     private static final String COPY_STRING = " — копия";
 
     public static void cloneFile(Path filePath) throws IOException {

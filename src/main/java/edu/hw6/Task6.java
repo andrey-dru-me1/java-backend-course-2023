@@ -13,6 +13,13 @@ import java.util.Map;
 
 public class Task6 {
 
+    private static final String TCP = "TCP";
+    private static final String UDP = "UDP";
+    private static final int LAST_PORT = 49151;
+
+    private Task6() {
+    }
+
     private static final Map<Integer, String> PORT_LIST = loadPortList();
 
     private static Map<Integer, String> loadPortList() {
@@ -23,7 +30,7 @@ public class Task6 {
         try (FileReader fileReader = new FileReader(file); BufferedReader reader = new BufferedReader(fileReader)) {
             for (String line = reader.readLine(); line != null; line = reader.readLine()) {
                 String[] entry = line.split(";");
-                if (entry.length < 3) {
+                if (entry.length <= 2) {
                     continue;
                 }
                 try {
@@ -42,10 +49,10 @@ public class Task6 {
 
     private static boolean portInUse(String protocol, int port) {
         try {
-            if ("TCP".equals(protocol)) {
+            if (TCP.equals(protocol)) {
                 new ServerSocket(port).close();
                 return false;
-            } else if ("UDP".equals(protocol)) {
+            } else if (UDP.equals(protocol)) {
                 new DatagramSocket(port).close();
                 return false;
             } else {
@@ -56,9 +63,10 @@ public class Task6 {
         }
     }
 
+    @SuppressWarnings("regexpsinglelinejava")
     public static void printPortsInUse() {
-        for (int port = 0; port < 49151; port++) {
-            for (String protocol : new String[]{"UDP", "TCP"}) {
+        for (int port = 0; port < LAST_PORT; port++) {
+            for (String protocol : new String[]{TCP, UDP}) {
                 if (portInUse(protocol, port)) {
                     System.out.printf("%-10s%-7d%-20s%n", protocol, port, PORT_LIST.getOrDefault(port, ""));
                 }
