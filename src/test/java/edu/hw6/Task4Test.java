@@ -20,6 +20,7 @@ class Task4Test {
         assertThat(file.exists()).isTrue();
         assertThat(new Scanner(file).nextLine()).isEqualTo(
                 "Programming is learned by writing programs. ― Brian Kernighan");
+        file.delete();
     }
 
 }
