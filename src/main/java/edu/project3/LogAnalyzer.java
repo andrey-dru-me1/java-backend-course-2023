@@ -14,11 +14,16 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings({"regexpsinglelinejava", "multiplestringliterals", "uncommentedmain", "magicnumber"})
 public class LogAnalyzer {
+
+    private LogAnalyzer() {
+    }
 
     private static final Pattern LOG_ENTRY_PATTERN = Pattern.compile(
             "(?<remoteAddress>.*?) - (?<remoteUser>.*?) \\[(?<timeLocal>.*?)] "
-                    + "\"(?<request>.*?)\" (?<status>\\d+) (?<bodyBytesSent>\\d+) \"(?<httpReferer>.*?)\" \"(?<httpUserAgent>.*?)\"");
+                    + "\"(?<request>.*?)\" (?<status>\\d+) (?<bodyBytesSent>\\d+) \"(?<httpReferer>.*?)\" "
+                    + "\"(?<httpUserAgent>.*?)\"");
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d/LLL/y:H:m:s Z");
 
     private static LogEntry parseLogEntry(String logEntry) {
