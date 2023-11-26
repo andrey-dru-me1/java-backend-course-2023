@@ -4,11 +4,15 @@ public class MultipleThreadsPiCounter extends AbstractPiCounter implements PiCou
 
     @Override
     public double countPi(long guessCount) {
+        int threadCount = Runtime.getRuntime().availableProcessors();
+        return countPiWithNThreads(guessCount, threadCount);
+    }
+
+    public double countPiWithNThreads(long guessCount, int threadCount) {
         if (guessCount < 1) {
             throw new IllegalArgumentException("guessCount should be greater than 0");
         }
 
-        int threadCount = Runtime.getRuntime().availableProcessors();
         PiCounterThread[] threads = new PiCounterThread[threadCount];
         for (int i = 0; i < threadCount; i++) {
             threads[i] = new PiCounterThread((i + 1) * guessCount / threadCount - i * guessCount / threadCount);

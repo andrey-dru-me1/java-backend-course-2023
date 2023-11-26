@@ -17,8 +17,8 @@ public abstract class AbstractPiCounter implements PiCounter {
     }
 
     @SuppressWarnings("magicnumber")
-    protected double calculatePiFromCircleCount(long circleCount, long allCount) {
-        return 4. * ((double) circleCount / allCount);
+    protected double calculatePiFromCircleCount(long circleCount, long totalCount) {
+        return 4. * ((double) circleCount / totalCount);
     }
 
 }
