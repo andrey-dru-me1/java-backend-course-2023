@@ -2,10 +2,12 @@ package edu.hw4;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class HW4Test {
 
@@ -57,6 +59,7 @@ public class HW4Test {
     @Test
     void testTask7() {
         assertThat(HW4.task7(animals, 5).name()).isEqualTo("Dog1");
+        assertThrows(NoSuchElementException.class, () -> HW4.task7(List.of(), 1));
     }
 
     @Test

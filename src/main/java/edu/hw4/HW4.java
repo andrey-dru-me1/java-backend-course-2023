@@ -55,7 +55,11 @@ public class HW4 {
 
     // K-е самое старое животное -> Animal
     public static Animal task7(List<Animal> animals, int k) {
-        return animals.stream().sorted(Comparator.comparing(Animal::age).reversed()).toList().get(k - 1);
+        return animals.stream()
+                .sorted(Comparator.comparing(Animal::age).reversed())
+                .skip(k - 1)
+                .findFirst()
+                .orElseThrow();
     }
 
     // Самое тяжелое животное среди животных ниже k см -> Optional<Animal>
