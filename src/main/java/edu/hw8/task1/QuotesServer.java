@@ -1,4 +1,4 @@
-package edu.hw8;
+package edu.hw8.task1;
 
 import java.io.BufferedReader;
 import java.io.IOException;

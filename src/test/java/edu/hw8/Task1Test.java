@@ -1,5 +1,7 @@
 package edu.hw8;
 
+import edu.hw8.task1.QuotesClient;
+import edu.hw8.task1.QuotesServer;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
