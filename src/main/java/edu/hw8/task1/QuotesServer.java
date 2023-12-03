@@ -10,15 +10,15 @@ import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class QuotesServer {
 
     private final int port;
     private final int threadCount;
     private final List<String> quotes;
-    private final Logger log = LoggerFactory.getLogger("QuotesServer");
+    private final Logger log = LogManager.getLogger("QuotesServer");
     private volatile boolean running = true;
     private ServerSocket serverSocket;
 
