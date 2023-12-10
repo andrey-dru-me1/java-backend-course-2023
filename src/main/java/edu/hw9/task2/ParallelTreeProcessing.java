@@ -12,6 +12,9 @@ import java.util.function.Predicate;
 
 public class ParallelTreeProcessing {
 
+    private ParallelTreeProcessing() {
+    }
+
     private static final int BIG_NUMBER = 1_000;
 
     public static List<File> searchBigDirectories(File initDirectory) {
@@ -34,7 +37,7 @@ public class ParallelTreeProcessing {
         private final File directory;
         private final Predicate<File> predicate;
 
-        public PredicateFileSearcher(File directory, Predicate<File> predicate) {
+        private PredicateFileSearcher(File directory, Predicate<File> predicate) {
             this.directory = directory;
             this.predicate = predicate;
         }
