@@ -11,22 +11,24 @@ import java.util.regex.Pattern;
 public class HackerNews {
 
     private static final int OK_STATUS = 200;
+    private static final String TOP_STORIES_URL = "https://hacker-news.firebaseio.com/v0/topstories.json";
+    private static final String NEWS_ITEM_URL = "https://hacker-news.firebaseio.com/v0/item/%d.json";
 
     private HackerNews() {
     }
 
-    private static final String TOP_STORIES_URL = "https://hacker-news.firebaseio.com/v0/topstories.json";
-    private static final String NEWS_ITEM_URL = "https://hacker-news.firebaseio.com/v0/item/%d.json";
+    private static HttpResponse<String> sendRequest(String uri) throws IOException, InterruptedException {
+        try (HttpClient httpClient = HttpClient.newHttpClient()) {
+            HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(uri)).build();
+            return httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+        }
+    }
 
     public static long[] hackerNewsTopStories() throws IOException, InterruptedException {
-        try (HttpClient httpClient = HttpClient.newHttpClient()) {
-            HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(TOP_STORIES_URL)).build();
-
-            HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == OK_STATUS) {
-                String[] ids = response.body().replaceAll("[\\[\\]]", "").split(",");
-                return stringsToLongs(ids);
-            }
+        HttpResponse<String> response = sendRequest(TOP_STORIES_URL);
+        if (response.statusCode() == OK_STATUS) {
+            String[] ids = response.body().replaceAll("[\\[\\]]", "").split(",");
+            return stringsToLongs(ids);
         }
         return new long[0];
     }
@@ -40,17 +42,13 @@ public class HackerNews {
     }
 
     public static String news(long id) throws IOException, InterruptedException {
-        try (HttpClient httpClient = HttpClient.newHttpClient()) {
-            HttpRequest httpRequest = HttpRequest.newBuilder(URI.create(String.format(NEWS_ITEM_URL, id))).build();
-            HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = sendRequest(String.format(NEWS_ITEM_URL, id));
+        if (response.statusCode() == OK_STATUS) {
+            Pattern pattern = Pattern.compile("\"title\":\"(?<title>.*?)\"");
+            Matcher matcher = pattern.matcher(response.body());
 
-            if (response.statusCode() == OK_STATUS) {
-                Pattern pattern = Pattern.compile("\"title\":\"(?<title>.*?)\"");
-                Matcher matcher = pattern.matcher(response.body());
-
-                if (matcher.find()) {
-                    return matcher.group("title");
-                }
+            if (matcher.find()) {
+                return matcher.group("title");
             }
         }
         return "Cannot get a news title.";

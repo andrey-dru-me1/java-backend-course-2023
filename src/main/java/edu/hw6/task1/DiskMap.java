@@ -38,7 +38,7 @@ public class DiskMap implements Map<String, String> {
             }
             reader.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Cannot load from file.", e);
         }
 
     }
@@ -54,7 +54,7 @@ public class DiskMap implements Map<String, String> {
             }
             writer.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Cannot store to file.", e);
         }
     }
 
