@@ -19,12 +19,14 @@ public class MazeSolver {
     public static List<Point> solve(Maze maze) {
         int height = maze.height();
         int width = maze.width();
+        Point start = new Point(0, 0);
+        Point end = new Point(height - 1, width - 1);
 
         Queue<Point> gray = new ArrayDeque<>();
         Set<Point> black = new HashSet<>();
-        Point current = new Point(0, 0);
+        Point current = start;
         Point[][] previousPoints = new Point[height][width];
-        while (!new Point(width - 1, height - 1).equals(current)) {
+        while (!end.equals(current)) {
             for (Direction d : Direction.values()) {
                 Point next = current.constructAdjacent(d);
                 if (maze.getIncidentWallState(current, d) == Cell.WallState.PASSAGE && !black.contains(next)) {
@@ -36,8 +38,8 @@ public class MazeSolver {
             current = gray.poll();
         }
         List<Point> trace = new ArrayList<>();
-        current = new Point(width - 1, height - 1);
-        while (!current.equals(new Point(0, 0))) {
+        current = end;
+        while (!current.equals(start)) {
             trace.add(current);
             current = previousPoints[current.row()][current.col()];
         }

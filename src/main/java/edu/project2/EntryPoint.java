@@ -8,7 +8,7 @@ public class EntryPoint {
 
     @SuppressWarnings({"uncommentedmain", "magicnumber", "regexpsinglelinejava"})
     public static void main(String[] args) {
-        Maze maze = MazeGenerator.generate(15, 15);
+        Maze maze = MazeGenerator.generate(10, 15);
         MazePrinter.print(maze);
         System.out.println(MazeSolver.solve(maze));
     }
