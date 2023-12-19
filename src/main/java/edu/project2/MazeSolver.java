@@ -16,11 +16,9 @@ public class MazeSolver {
     private MazeSolver() {
     }
 
-    public static List<Point> solve(Maze maze) {
+    public static List<Point> solve(Maze maze, Point start, Point end) {
         int height = maze.height();
         int width = maze.width();
-        Point start = new Point(0, 0);
-        Point end = new Point(height - 1, width - 1);
 
         Queue<Point> gray = new ArrayDeque<>();
         Set<Point> black = new HashSet<>();

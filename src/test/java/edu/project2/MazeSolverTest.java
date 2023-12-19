@@ -22,7 +22,7 @@ class MazeSolverTest {
                         new Cell(Cell.WallState.PASSAGE, Cell.WallState.WALL),
                         new Cell(Cell.WallState.WALL, Cell.WallState.PASSAGE)}
         });
-        assertThat(MazeSolver.solve(maze)).isEqualTo(
+        assertThat(MazeSolver.solve(maze, new Point(0, 0), new Point(1, 2))).isEqualTo(
                 List.of(new Point(0, 0), new Point(0, 1), new Point(1, 1), new Point(1, 2)));
     }
 }
